@@ -17,9 +17,22 @@ import io.fabric8.kubernetes.api.model.batch.v1.JobStatus;
 import io.fabric8.kubernetes.client.Config;
 import io.fabric8.kubernetes.client.DefaultKubernetesClient;
 import io.fabric8.kubernetes.client.KubernetesClient;
+import io.fabric8.kubernetes.client.dsl.MixedOperation;
+import io.fabric8.kubernetes.client.dsl.Resource;
 import io.fabric8.kubernetes.client.dsl.RollableScalableResource;
 import io.fabric8.kubernetes.client.http.HttpClient;
 import io.fabric8.kubernetes.client.utils.HttpClientUtils;
+import io.strimzi.api.kafka.Crds;
+import io.strimzi.api.kafka.KafkaConnectList;
+import io.strimzi.api.kafka.KafkaConnectorList;
+import io.strimzi.api.kafka.KafkaList;
+import io.strimzi.api.kafka.KafkaTopicList;
+import io.strimzi.api.kafka.KafkaUserList;
+import io.strimzi.api.kafka.model.Kafka;
+import io.strimzi.api.kafka.model.KafkaConnect;
+import io.strimzi.api.kafka.model.KafkaConnector;
+import io.strimzi.api.kafka.model.KafkaTopic;
+import io.strimzi.api.kafka.model.KafkaUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -259,5 +272,25 @@ public class KubeClient {
     public List<Job> listJobs(String namePrefix) {
         return client.batch().v1().jobs().inNamespace(getNamespace()).list().getItems().stream()
             .filter(job -> job.getMetadata().getName().startsWith(namePrefix)).collect(Collectors.toList());
+    }
+
+    public MixedOperation<Kafka, KafkaList, Resource<Kafka>> kafkaClient() {
+        return Crds.kafkaOperation(client);
+    }
+
+    public MixedOperation<KafkaConnect, KafkaConnectList, Resource<KafkaConnect>> kafkaConnectClient() {
+        return Crds.kafkaConnectOperation(client);
+    }
+
+    public MixedOperation<KafkaConnector, KafkaConnectorList, Resource<KafkaConnector>> kafkaConnectorClient() {
+        return Crds.kafkaConnectorOperation(client);
+    }
+
+    public MixedOperation<KafkaUser, KafkaUserList, Resource<KafkaUser>> kafkaUserClient() {
+        return Crds.kafkaUserOperation(client);
+    }
+
+    public MixedOperation<KafkaTopic, KafkaTopicList, Resource<KafkaTopic>> kafkaTopicClient() {
+        return Crds.topicOperation(client);
     }
 }
