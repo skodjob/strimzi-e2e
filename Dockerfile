@@ -1,3 +1,3 @@
-FROM quay.io/tealc/apophis
+FROM quay.io/tealc/apophis:latest
 
-COPY src /opt/thor/src
+COPY . /opt/thor/
