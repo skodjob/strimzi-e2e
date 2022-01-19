@@ -20,6 +20,8 @@ import io.fabric8.kubernetes.client.KubernetesClient;
 import io.fabric8.kubernetes.client.dsl.RollableScalableResource;
 import io.fabric8.kubernetes.client.http.HttpClient;
 import io.fabric8.kubernetes.client.utils.HttpClientUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -29,8 +31,10 @@ public class KubeClient {
     protected final KubernetesClient client;
     protected String namespace;
 
-    public KubeClient(String namespace) {
+    private static final Logger LOGGER = LoggerFactory.getLogger(KubeClient.class);
 
+    public KubeClient(String namespace) {
+        LOGGER.debug("Creating client in namespace: {}", namespace);
         Config config = Config.autoConfigure(System.getenv().getOrDefault("KUBE_CONTEXT", null));
 
         HttpClient httpClient = HttpClientUtils.createHttpClient(config);
@@ -47,6 +51,7 @@ public class KubeClient {
     }
 
     public KubeClient(KubernetesClient client, String namespace) {
+        LOGGER.debug("Creating client in namespace: {}", namespace);
         this.client = client;
         this.namespace = namespace;
     }
@@ -63,8 +68,10 @@ public class KubeClient {
     // ---------> NAMESPACE <---------
     // ===============================
 
-    public KubeClient namespace(String futureNamespace) {
-        return new KubeClient(this.client, futureNamespace);
+    public KubeClient inNamespace(String namespace) {
+        LOGGER.debug("Using namespace: {}", namespace);
+        this.namespace = namespace;
+        return this;
     }
 
     public String getNamespace() {
@@ -95,7 +102,7 @@ public class KubeClient {
     }
 
     public ConfigMap getConfigMap(String configMapName) {
-        return getConfigMap(getNamespace(), configMapName);
+        return getConfigMap(namespace, configMapName);
     }
 
 
@@ -107,7 +114,7 @@ public class KubeClient {
     // ---------> POD <---------
     // =========================
     public List<Pod> listPods() {
-        return client.pods().list().getItems();
+        return client.pods().inNamespace(namespace).list().getItems();
     }
 
     public List<Pod> listPods(String namespaceName) {
@@ -134,7 +141,7 @@ public class KubeClient {
     }
 
     public Pod getPod(String name) {
-        return getPod(getNamespace(), name);
+        return getPod(namespace, name);
     }
 
     // ==================================
@@ -149,7 +156,7 @@ public class KubeClient {
     }
 
     public StatefulSet getStatefulSet(String statefulSetName) {
-        return getStatefulSet(getNamespace(), statefulSetName);
+        return getStatefulSet(namespace, statefulSetName);
     }
 
     /**
@@ -160,7 +167,7 @@ public class KubeClient {
     }
 
     public RollableScalableResource<StatefulSet> statefulSet(String statefulSetName) {
-        return statefulSet(getNamespace(), statefulSetName);
+        return statefulSet(namespace, statefulSetName);
     }
     // ================================
     // ---------> DEPLOYMENT <---------
@@ -175,7 +182,7 @@ public class KubeClient {
     }
 
     public Deployment getDeployment(String deploymentName) {
-        return client.apps().deployments().withName(deploymentName).get();
+        return client.apps().deployments().inNamespace(namespace).withName(deploymentName).get();
     }
 
     public Deployment getDeploymentFromAnyNamespaces(String deploymentName) {
@@ -217,11 +224,11 @@ public class KubeClient {
     // =========================
 
     public boolean jobExists(String jobName) {
-        return client.batch().v1().jobs().inNamespace(getNamespace()).list().getItems().stream().anyMatch(j -> j.getMetadata().getName().startsWith(jobName));
+        return client.batch().v1().jobs().inNamespace(namespace).list().getItems().stream().anyMatch(j -> j.getMetadata().getName().startsWith(jobName));
     }
 
     public Job getJob(String jobName) {
-        return client.batch().v1().jobs().inNamespace(getNamespace()).withName(jobName).get();
+        return client.batch().v1().jobs().inNamespace(namespace).withName(jobName).get();
     }
 
     public boolean checkSucceededJobStatus(String jobName) {
@@ -242,11 +249,11 @@ public class KubeClient {
     }
 
     public JobStatus getJobStatus(String jobName) {
-        return getJobStatus(getNamespace(), jobName);
+        return getJobStatus(namespace, jobName);
     }
 
     public JobList getJobList() {
-        return client.batch().v1().jobs().inNamespace(getNamespace()).list();
+        return client.batch().v1().jobs().inNamespace(namespace).list();
     }
 
     public List<Job> listJobs(String namePrefix) {
