@@ -11,7 +11,7 @@ import org.junit.jupiter.api.TestInstance;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class Abstract implements TestSeparator {
     protected static final String KAFKA_NAMESPACE = "strimzi-kafka";
-    protected static final String STRIMZI_NAMESPACE = "strimzi-operators";
+    protected static final String STRIMZI_NAMESPACE = "strimzi-operator";
     protected static final String CLIENTS_NAMESPACE = "strimzi-clients";
     protected static final String MONITORING_NAMESPACE = "strimzi-monitoring";
     protected static final String TWITTER_NAMESPACE = "strimzi-twitter-connector";
