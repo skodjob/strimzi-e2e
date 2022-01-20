@@ -22,6 +22,7 @@
         <slf4j.version>1.7.33</slf4j.version>
         <maven.checkstyle.version>3.1.2</maven.checkstyle.version>
         <strimzi.version>0.27.1</strimzi.version>
+        <reportportal.version>5.1.0</reportportal.version>
     </properties>
 
     <dependencies>
@@ -38,14 +39,14 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
+            <groupId>com.epam.reportportal</groupId>
+            <artifactId>logger-java-logback</artifactId>
+            <version>5.1.1</version>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>${slf4j.version}</version>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.10</version>
         </dependency>
         <dependency>
             <groupId>io.fabric8</groupId>
@@ -121,6 +122,11 @@
             <scope>compile</scope>
             <version>${hamcrest.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.epam.reportportal</groupId>
+            <artifactId>agent-java-junit5</artifactId>
+            <version>${reportportal.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -157,6 +163,13 @@
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.surefire.version}</version>
+                <configuration>
+                    <properties>
+                        <configurationParameters>
+                            junit.jupiter.extensions.autodetection.enabled = true
+                        </configurationParameters>
+                    </properties>
+                </configuration>
             </plugin>
         </plugins>
     </build>
