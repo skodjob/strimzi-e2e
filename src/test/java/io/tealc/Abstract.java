@@ -14,7 +14,7 @@ public class Abstract implements TestSeparator {
     protected static final String STRIMZI_NAMESPACE = "strimzi-operator";
     protected static final String CLIENTS_NAMESPACE = "strimzi-clients";
     protected static final String MONITORING_NAMESPACE = "strimzi-monitoring";
-    protected static final String TWITTER_NAMESPACE = "strimzi-twitter-connector";
+    protected static final String TWITTER_NAMESPACE = "strimzi-kafka";
     protected static final String DRAIN_CLEANER_NAMESPACE = "strimzi-drain-cleaner";
 
     private KubeClient client;
