@@ -15,13 +15,12 @@ import io.fabric8.kubernetes.api.model.batch.v1.Job;
 import io.fabric8.kubernetes.api.model.batch.v1.JobList;
 import io.fabric8.kubernetes.api.model.batch.v1.JobStatus;
 import io.fabric8.kubernetes.client.Config;
-import io.fabric8.kubernetes.client.DefaultKubernetesClient;
 import io.fabric8.kubernetes.client.KubernetesClient;
+import io.fabric8.kubernetes.client.KubernetesClientBuilder;
 import io.fabric8.kubernetes.client.dsl.MixedOperation;
 import io.fabric8.kubernetes.client.dsl.Resource;
 import io.fabric8.kubernetes.client.dsl.RollableScalableResource;
-import io.fabric8.kubernetes.client.http.HttpClient;
-import io.fabric8.kubernetes.client.utils.HttpClientUtils;
+import io.fabric8.openshift.client.OpenShiftClient;
 import io.strimzi.api.kafka.Crds;
 import io.strimzi.api.kafka.KafkaConnectList;
 import io.strimzi.api.kafka.KafkaConnectorList;
@@ -37,7 +36,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class KubeClient {
@@ -50,16 +48,10 @@ public class KubeClient {
         LOGGER.debug("Creating client in namespace: {}", namespace);
         Config config = Config.autoConfigure(System.getenv().getOrDefault("KUBE_CONTEXT", null));
 
-        HttpClient httpClient = HttpClientUtils.createHttpClient(config);
-
-        httpClient = httpClient.newBuilder()
-                .preferHttp11()
-                .connectTimeout(60L, TimeUnit.SECONDS)
-                .writeTimeout(60L, TimeUnit.SECONDS)
-                .readTimeout(60L, TimeUnit.SECONDS)
-                .build();
-
-        this.client = new DefaultKubernetesClient(httpClient, config);
+        this.client = new KubernetesClientBuilder()
+                .withConfig(config)
+                .build()
+                .adapt(OpenShiftClient.class);
         this.namespace = namespace;
     }
 
