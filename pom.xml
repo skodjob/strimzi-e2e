@@ -129,35 +129,6 @@
             <artifactId>agent-java-junit5</artifactId>
             <version>${reportportal.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.sundr</groupId>
-            <artifactId>builder-annotations</artifactId>
-            <version>${sundrio.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.fabric8</groupId>
-            <artifactId>kubernetes-model-generator</artifactId>
-            <version>${fabric8.version}</version>
-            <type>pom</type>
-        </dependency>
-        <dependency>
-            <groupId>io.fabric8</groupId>
-            <artifactId>crd-generator-apt</artifactId>
-            <version>${fabric8.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.fabric8</groupId>
-            <artifactId>kubernetes-model-annotator</artifactId>
-            <version>4.13.3</version>
-        </dependency>
     </dependencies>
 
     <build>
@@ -200,23 +171,6 @@
                             junit.jupiter.extensions.autodetection.enabled = true
                         </configurationParameters>
                     </properties>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>io.fabric8</groupId>
-                <artifactId>java-generator-maven-plugin</artifactId>
-                <version>${fabric8.version}</version>
-                <executions>
-                    <execution>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <source>crds</source>
-                    <extraAnnotations>true</extraAnnotations>
                 </configuration>
             </plugin>
         </plugins>

@@ -4,9 +4,7 @@
  */
 package io.tealc;
 
-import io.amq.broker.v1beta1.ActiveMQArtemis;
 import io.fabric8.kubernetes.api.model.ConfigMap;
-import io.fabric8.kubernetes.api.model.DefaultKubernetesResourceList;
 import io.fabric8.kubernetes.api.model.LabelSelector;
 import io.fabric8.kubernetes.api.model.Namespace;
 import io.fabric8.kubernetes.api.model.Node;
@@ -286,19 +284,5 @@ public class KubeClient {
 
     public MixedOperation<KafkaTopic, KafkaTopicList, Resource<KafkaTopic>> kafkaTopicClient() {
         return Crds.topicOperation(client);
-    }
-
-    /**
-     * Check why this is not generated because it is needed by client
-     */
-    public class ArtemisList extends DefaultKubernetesResourceList<ActiveMQArtemis> {
-        private static final long serialVersionUID = 1L;
-    }
-
-    /**
-     * Usage: artemisV1BetaV1().inNamespace(namespace).withName(broker).dostuff()
-     */
-    public MixedOperation<ActiveMQArtemis, ArtemisList, Resource<ActiveMQArtemis>> artemisV1BetaV1() {
-        return client.resources(ActiveMQArtemis.class, ArtemisList.class);
     }
 }
