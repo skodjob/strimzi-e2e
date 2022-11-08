@@ -16,13 +16,15 @@
         <maven.failsafe.version>3.0.0-M5</maven.failsafe.version>
         <checkstyle.version>9.0.1</checkstyle.version>
         <spotbugs.version>4.0.3</spotbugs.version>
-        <fabric8.version>5.11.2</fabric8.version>
+        <fabric8.version>6.2.0</fabric8.version>
         <hamcrest.version>2.2</hamcrest.version>
         <junit.version>5.8.2</junit.version>
         <slf4j.version>1.7.33</slf4j.version>
         <maven.checkstyle.version>3.1.2</maven.checkstyle.version>
-        <strimzi.version>0.27.1</strimzi.version>
+        <strimzi.version>0.32.0</strimzi.version>
         <reportportal.version>5.1.0</reportportal.version>
+        <lombok.version>1.18.24</lombok.version>
+        <sundrio.version>0.93.1</sundrio.version>
     </properties>
 
     <dependencies>
@@ -127,6 +129,35 @@
             <artifactId>agent-java-junit5</artifactId>
             <version>${reportportal.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.sundr</groupId>
+            <artifactId>builder-annotations</artifactId>
+            <version>${sundrio.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>kubernetes-model-generator</artifactId>
+            <version>${fabric8.version}</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>crd-generator-apt</artifactId>
+            <version>${fabric8.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>kubernetes-model-annotator</artifactId>
+            <version>4.13.3</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -169,6 +200,23 @@
                             junit.jupiter.extensions.autodetection.enabled = true
                         </configurationParameters>
                     </properties>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>java-generator-maven-plugin</artifactId>
+                <version>${fabric8.version}</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <source>crds</source>
+                    <extraAnnotations>true</extraAnnotations>
                 </configuration>
             </plugin>
         </plugins>
