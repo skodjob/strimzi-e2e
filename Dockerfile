@@ -1,4 +1,8 @@
-FROM quay.io/tealc/apophis:latest
+FROM quay.io/rh_integration/strimzi-tools:latest
+
+ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk
+
+USER root
 
 COPY . /opt/thor/
 
