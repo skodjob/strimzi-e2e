@@ -8,20 +8,20 @@
     <modelVersion>4.0.0</modelVersion>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.surefire.version>3.0.0-M5</maven.surefire.version>
         <maven.failsafe.version>3.0.0-M5</maven.failsafe.version>
-        <checkstyle.version>9.0.1</checkstyle.version>
+        <checkstyle.version>10.9.2</checkstyle.version>
         <spotbugs.version>4.0.3</spotbugs.version>
-        <fabric8.version>6.2.0</fabric8.version>
+        <fabric8.version>6.5.1</fabric8.version>
         <hamcrest.version>2.2</hamcrest.version>
-        <junit.version>5.8.2</junit.version>
+        <junit.version>5.9.2</junit.version>
         <slf4j.version>1.7.33</slf4j.version>
         <maven.checkstyle.version>3.1.2</maven.checkstyle.version>
-        <strimzi.version>0.32.0</strimzi.version>
+        <strimzi.version>0.34.0</strimzi.version>
         <reportportal.version>5.1.0</reportportal.version>
         <lombok.version>1.18.24</lombok.version>
         <sundrio.version>0.93.1</sundrio.version>
@@ -38,17 +38,11 @@
                     <groupId>org.apache.logging.log4j</groupId>
                     <artifactId>log4j-slf4j-impl</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>io.fabric8</groupId>
+                    <artifactId>kubernetes-client-api</artifactId>
+                </exclusion>
             </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>com.epam.reportportal</groupId>
-            <artifactId>logger-java-logback</artifactId>
-            <version>5.1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.2.10</version>
         </dependency>
         <dependency>
             <groupId>io.fabric8</groupId>
@@ -123,11 +117,6 @@
             <artifactId>hamcrest</artifactId>
             <scope>compile</scope>
             <version>${hamcrest.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.epam.reportportal</groupId>
-            <artifactId>agent-java-junit5</artifactId>
-            <version>${reportportal.version}</version>
         </dependency>
     </dependencies>
 
