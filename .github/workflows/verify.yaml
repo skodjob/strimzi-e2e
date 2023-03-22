@@ -24,7 +24,7 @@ jobs:
           CONTAINER_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
           CONTAINER_REGISTRY: quay.io
         run:
-          echo "$CONTAINER_PASSWORD" | docker login CONTAINER_REGISTRY --username $CONTAINER_USER --password-stdin
+          echo "$CONTAINER_PASSWORD" | docker login $CONTAINER_REGISTRY --username $CONTAINER_USER --password-stdin
 
       - name: Build images
         run: |
