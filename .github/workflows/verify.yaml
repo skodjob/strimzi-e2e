@@ -17,6 +17,11 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v1
+      
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt-openj9'
+          java-version: '17'
 
       - name: Login to quay
         env:
@@ -24,7 +29,7 @@ jobs:
           CONTAINER_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
           CONTAINER_REGISTRY: quay.io
         run:
-          docker login -u $CONTAINER_USER -p $CONTAINER_PASSWORD $CONTAINER_REGISTRY
+          echo "$CONTAINER_PASSWORD" | docker login $CONTAINER_REGISTRY --username $CONTAINER_USER --password-stdin
 
       - name: Build images
         run: |
