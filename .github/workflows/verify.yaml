@@ -17,6 +17,11 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v1
+      
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt-openj9'
+          java-version: '17'
 
       - name: Login to quay
         env:
