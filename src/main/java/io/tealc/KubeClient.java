@@ -25,11 +25,15 @@ import io.strimzi.api.kafka.Crds;
 import io.strimzi.api.kafka.KafkaConnectList;
 import io.strimzi.api.kafka.KafkaConnectorList;
 import io.strimzi.api.kafka.KafkaList;
+import io.strimzi.api.kafka.KafkaMirrorMaker2List;
+import io.strimzi.api.kafka.KafkaRebalanceList;
 import io.strimzi.api.kafka.KafkaTopicList;
 import io.strimzi.api.kafka.KafkaUserList;
 import io.strimzi.api.kafka.model.Kafka;
 import io.strimzi.api.kafka.model.KafkaConnect;
 import io.strimzi.api.kafka.model.KafkaConnector;
+import io.strimzi.api.kafka.model.KafkaMirrorMaker2;
+import io.strimzi.api.kafka.model.KafkaRebalance;
 import io.strimzi.api.kafka.model.KafkaTopic;
 import io.strimzi.api.kafka.model.KafkaUser;
 import org.slf4j.Logger;
@@ -48,6 +52,14 @@ public class KubeClient {
         LOGGER.debug("Creating client in namespace: {}", namespace);
         Config config = Config.autoConfigure(System.getenv().getOrDefault("KUBE_CONTEXT", null));
 
+        this.client = new KubernetesClientBuilder()
+                .withConfig(config)
+                .build()
+                .adapt(OpenShiftClient.class);
+        this.namespace = namespace;
+    }
+
+    public KubeClient(Config config, String namespace) {
         this.client = new KubernetesClientBuilder()
                 .withConfig(config)
                 .build()
@@ -147,6 +159,10 @@ public class KubeClient {
 
     public Pod getPod(String name) {
         return getPod(namespace, name);
+    }
+
+    public String getLogs(String namespaceName, String podName) {
+        return client.pods().inNamespace(namespaceName).withName(podName).getLog();
     }
 
     // ==================================
@@ -284,5 +300,13 @@ public class KubeClient {
 
     public MixedOperation<KafkaTopic, KafkaTopicList, Resource<KafkaTopic>> kafkaTopicClient() {
         return Crds.topicOperation(client);
+    }
+
+    public MixedOperation<KafkaMirrorMaker2, KafkaMirrorMaker2List, Resource<KafkaMirrorMaker2>> kafkaMirrorMaker2Client() {
+        return Crds.kafkaMirrorMaker2Operation(client);
+    }
+
+    public MixedOperation<KafkaRebalance, KafkaRebalanceList, Resource<KafkaRebalance>> kafkaRebalanceClient() {
+        return Crds.kafkaRebalanceOperation(client);
     }
 }
