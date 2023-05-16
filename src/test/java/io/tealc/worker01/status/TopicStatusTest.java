@@ -2,10 +2,13 @@
  * Copyright Tealc authors.
  * License: Apache License 2.0 (see the file LICENSE or http://apache.org/licenses/LICENSE-2.0.html).
  */
-package io.tealc.status;
+package io.tealc.worker01.status;
 
 import io.strimzi.api.kafka.model.KafkaTopic;
 import io.tealc.Abstract;
+import io.tealc.ClusterManager;
+import io.tealc.EClusters;
+import io.tealc.ENamespaces;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.slf4j.Logger;
@@ -24,13 +27,13 @@ public class TopicStatusTest extends Abstract {
     @ParameterizedTest(name = "testKafkaTopicIsReady - {0}")
     @MethodSource("getTopicNames")
     void testKafkaUserIsReady(String topicName) {
-        KafkaTopic kafkaTopic = getClient().kafkaTopicClient().inNamespace(KAFKA_NAMESPACE).withName(topicName).get();
+        KafkaTopic kafkaTopic = ClusterManager.getInstance().getClient(EClusters.WORKER_01).kafkaTopicClient().inNamespace(ENamespaces.KAFKA.name).withName(topicName).get();
         String status = kafkaTopic.getStatus().getConditions().stream().filter(item -> item.getType().equals("Ready")).collect(Collectors.toList()).get(0).getStatus();
         LOGGER.debug("KafkaTopic: {}", kafkaTopic);
-        assertThat("KafkaTopic is not ready in namespace " + KAFKA_NAMESPACE, status, is("True"));
+        assertThat(String.format("KafkaTopic %s is not ready in namespace %s", kafkaTopic.getMetadata().getName(), ENamespaces.KAFKA.name), status, is("True"));
     }
 
     private Stream<String> getTopicNames() {
-        return getClient().kafkaTopicClient().inNamespace(KAFKA_NAMESPACE).list().getItems().stream().map(name -> name.getMetadata().getName()).collect(Collectors.toList()).stream();
+        return ClusterManager.getInstance().getClient(EClusters.WORKER_01).kafkaTopicClient().inNamespace(ENamespaces.KAFKA.name).list().getItems().stream().map(name -> name.getMetadata().getName()).collect(Collectors.toList()).stream();
     }
 }

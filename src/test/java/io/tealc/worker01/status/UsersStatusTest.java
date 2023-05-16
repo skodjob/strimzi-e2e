@@ -2,10 +2,13 @@
  * Copyright Tealc authors.
  * License: Apache License 2.0 (see the file LICENSE or http://apache.org/licenses/LICENSE-2.0.html).
  */
-package io.tealc.status;
+package io.tealc.worker01.status;
 
 import io.strimzi.api.kafka.model.KafkaUser;
 import io.tealc.Abstract;
+import io.tealc.ClusterManager;
+import io.tealc.EClusters;
+import io.tealc.ENamespaces;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.slf4j.Logger;
@@ -24,10 +27,10 @@ public class UsersStatusTest extends Abstract {
     @ParameterizedTest(name = "testKafkaUserIsReady - {0}")
     @MethodSource("getUserNames")
     void testKafkaUserIsReady(String userName) {
-        KafkaUser kafkaUser = getClient().kafkaUserClient().inNamespace(KAFKA_NAMESPACE).withName(userName).get();
+        KafkaUser kafkaUser = ClusterManager.getInstance().getClient(EClusters.WORKER_01).kafkaUserClient().inNamespace(ENamespaces.KAFKA.name).withName(userName).get();
         String status = kafkaUser.getStatus().getConditions().stream().filter(item -> item.getType().equals("Ready")).collect(Collectors.toList()).get(0).getStatus();
         LOGGER.debug("KafkaUser: {}", kafkaUser);
-        assertThat("KafkaUser is not ready in namespace " + KAFKA_NAMESPACE, status, is("True"));
+        assertThat(String.format("KafkaUser %s is not ready in namespace %s", kafkaUser.getMetadata().getName(), ENamespaces.KAFKA.name), status, is("True"));
     }
 
     private Stream<String> getUserNames() {

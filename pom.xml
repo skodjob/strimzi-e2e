@@ -12,11 +12,11 @@
         <maven.compiler.target>17</maven.compiler.target>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.surefire.version>3.0.0-M5</maven.surefire.version>
-        <maven.failsafe.version>3.0.0-M5</maven.failsafe.version>
+        <maven.surefire.version>3.0.0-M7</maven.surefire.version>
+        <maven.failsafe.version>3.0.0-M7</maven.failsafe.version>
         <checkstyle.version>10.9.2</checkstyle.version>
-        <spotbugs.version>4.0.3</spotbugs.version>
-        <fabric8.version>6.5.1</fabric8.version>
+        <spotbugs.version>4.7.3</spotbugs.version>
+        <fabric8.version>6.6.2</fabric8.version>
         <hamcrest.version>2.2</hamcrest.version>
         <junit.version>5.9.2</junit.version>
         <slf4j.version>1.7.33</slf4j.version>
@@ -25,6 +25,8 @@
         <reportportal.version>5.1.0</reportportal.version>
         <lombok.version>1.18.24</lombok.version>
         <sundrio.version>0.93.1</sundrio.version>
+        <logback.version>1.4.7</logback.version>
+        <slf4j.version>2.0.7</slf4j.version>
     </properties>
 
     <dependencies>
@@ -117,6 +119,18 @@
             <artifactId>hamcrest</artifactId>
             <scope>compile</scope>
             <version>${hamcrest.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <scope>runtime</scope>
+            <version>${logback.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
