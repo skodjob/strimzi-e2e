@@ -25,6 +25,7 @@ public class ClusterManager {
                 .withPassword(Environment.WORKER_01_PASSWORD)
                 .withMasterUrl(Environment.WORKER_01_URL)
                 .withDisableHostnameVerification(true)
+                .withTrustCerts(true)
                 .build();
 
         CLIENTS.put(EClusters.WORKER_01, new KubeClient(config, "default"));
@@ -34,6 +35,7 @@ public class ClusterManager {
                 .withPassword(Environment.WORKER_02_PASSWORD)
                 .withMasterUrl(Environment.WORKER_02_URL)
                 .withDisableHostnameVerification(true)
+                .withTrustCerts(true)
                 .build();
 
         CLIENTS.put(EClusters.WORKER_02, new KubeClient(config, "default"));
@@ -43,6 +45,7 @@ public class ClusterManager {
                 .withPassword(Environment.WORKER_03_PASSWORD)
                 .withMasterUrl(Environment.WORKER_03_URL)
                 .withDisableHostnameVerification(true)
+                .withTrustCerts(true)
                 .build();
 
         CLIENTS.put(EClusters.WORKER_03, new KubeClient(config, "default"));
