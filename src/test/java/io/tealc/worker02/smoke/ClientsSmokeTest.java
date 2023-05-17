@@ -34,7 +34,7 @@ public class ClientsSmokeTest extends Abstract {
         LOGGER.info("Kafka clients pods list size: {}", listPods.size());
         assertThat("There are not enough KafkaClients pods in namespace " + namespace, listPods.size(), greaterThanOrEqualTo(count));
 
-        for (Pod pod: listPods) {
+        for (Pod pod : listPods) {
             String podPhase = pod.getStatus().getPhase();
             assertThat(String.format("Pod {} is not running ({})", pod.getMetadata().getName(), podPhase),
                     podPhase, is("Running"));
