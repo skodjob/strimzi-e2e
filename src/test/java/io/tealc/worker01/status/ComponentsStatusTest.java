@@ -31,7 +31,7 @@ public class ComponentsStatusTest extends Abstract {
     @MethodSource("kafkaInstances")
     void testKafkaIsReady(String namespace, String name) {
         Kafka kafka = ClusterManager.getInstance().getClient(EClusters.WORKER_01).kafkaClient().inNamespace(namespace).withName(name).get();
-        String status = kafka.getStatus().getConditions().stream().filter(item -> item.getType().equals("Ready")).collect(Collectors.toList()).get(0).getStatus();
+        String status = kafka.getStatus().getConditions().stream().filter(item -> item.getType().equals("Ready")).toList().get(0).getStatus();
         LOGGER.debug("Kafka: {}", kafka);
         assertThat(String.format("Kafka %s is not ready in namespace %s", name, namespace), status, is("True"));
     }
@@ -40,7 +40,7 @@ public class ComponentsStatusTest extends Abstract {
     @MethodSource("kafkaConnectInstances")
     void testKafkaConnectIsReady(String namespace, String name) {
         KafkaConnect kafkaConnect = ClusterManager.getInstance().getClient(EClusters.WORKER_01).kafkaConnectClient().inNamespace(namespace).withName(name).get();
-        String status = kafkaConnect.getStatus().getConditions().stream().filter(item -> item.getType().equals("Ready")).collect(Collectors.toList()).get(0).getStatus();
+        String status = kafkaConnect.getStatus().getConditions().stream().filter(item -> item.getType().equals("Ready")).toList().get(0).getStatus();
         LOGGER.debug("KafkaConnect: {}", kafkaConnect);
         assertThat(String.format("KafkaConnect %s is not ready in namespace %s", name, namespace), status, is("True"));
     }
@@ -49,7 +49,7 @@ public class ComponentsStatusTest extends Abstract {
     @MethodSource("kafkaMirrorMakerInstances")
     void testKafkaMirrorMaker2IsReady(String namespace, String name) {
         KafkaMirrorMaker2 kafkaMirrorMaker2 = ClusterManager.getInstance().getClient(EClusters.WORKER_01).kafkaMirrorMaker2Client().inNamespace(namespace).withName(name).get();
-        String status = kafkaMirrorMaker2.getStatus().getConditions().stream().filter(item -> item.getType().equals("Ready")).collect(Collectors.toList()).get(0).getStatus();
+        String status = kafkaMirrorMaker2.getStatus().getConditions().stream().filter(item -> item.getType().equals("Ready")).toList().get(0).getStatus();
         LOGGER.debug("KafkaMirrorMaker2: {}", kafkaMirrorMaker2);
         assertThat(String.format("KafkaConnect %s is not ready in namespace %s", name, namespace), status, is("True"));
     }
