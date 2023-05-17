@@ -14,16 +14,18 @@ public class ClusterManager {
     private static ClusterManager instance;
 
     public static final Map<EClusters, KubeClient> CLIENTS = new LinkedHashMap<>();
+
     public static synchronized ClusterManager getInstance() {
         if (instance == null) {
             instance = new ClusterManager();
         }
 
         Config config = new ConfigBuilder()
-            .withUsername(Environment.WORKER_01_USERNAME)
-            .withPassword(Environment.WORKER_01_PASSWORD)
-            .withMasterUrl(Environment.WORKER_01_URL)
-            .build();
+                .withUsername(Environment.WORKER_01_USERNAME)
+                .withPassword(Environment.WORKER_01_PASSWORD)
+                .withMasterUrl(Environment.WORKER_01_URL)
+                .withDisableHostnameVerification(true)
+                .build();
 
         CLIENTS.put(EClusters.WORKER_01, new KubeClient(config, "default"));
 
@@ -31,6 +33,7 @@ public class ClusterManager {
                 .withUsername(Environment.WORKER_02_USERNAME)
                 .withPassword(Environment.WORKER_02_PASSWORD)
                 .withMasterUrl(Environment.WORKER_02_URL)
+                .withDisableHostnameVerification(true)
                 .build();
 
         CLIENTS.put(EClusters.WORKER_02, new KubeClient(config, "default"));
@@ -39,6 +42,7 @@ public class ClusterManager {
                 .withUsername(Environment.WORKER_03_USERNAME)
                 .withPassword(Environment.WORKER_03_PASSWORD)
                 .withMasterUrl(Environment.WORKER_03_URL)
+                .withDisableHostnameVerification(true)
                 .build();
 
         CLIENTS.put(EClusters.WORKER_03, new KubeClient(config, "default"));
