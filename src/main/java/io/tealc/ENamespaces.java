@@ -14,7 +14,8 @@ public enum ENamespaces {
     CONNECT("strimzi-connect"),
     CLIENTS("strimzi-clients"),
     CLIENTS_KRAFT("strimzi-clients-kraft"),
-    DRAIN_CLEANER("strimzi-drain-cleaner");
+    DRAIN_CLEANER("strimzi-drain-cleaner"),
+    OPENSHIFT_OPERATORS("openshift-operators");
 
     public final String name;
 
