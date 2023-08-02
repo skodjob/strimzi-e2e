@@ -31,8 +31,8 @@ public class InfraSmokeTest extends Abstract {
     void testComponentIsDeployed(String namespace, String podPrefix, int count) {
         List<Pod> listPods = ClusterManager.getInstance().getClient(EClusters.WORKER_01).inNamespace(namespace).listPods().stream()
                 .filter(pod -> pod.getMetadata().getName().contains(podPrefix)).toList();
-        LOGGER.info("Kafka clients pods list size: {}", listPods.size());
-        assertThat("There are not enough KafkaClients pods in namespace " + namespace, listPods.size(), greaterThanOrEqualTo(count));
+        LOGGER.info("{}} pods list size: {}", podPrefix, listPods.size());
+        assertThat("There are not enough " + podPrefix + " pods in namespace " + namespace, listPods.size(), greaterThanOrEqualTo(count));
 
         for (Pod pod: listPods) {
             String podPhase = pod.getStatus().getPhase();
@@ -49,8 +49,10 @@ public class InfraSmokeTest extends Abstract {
 
     private static Stream<Arguments> componentDeployments() {
         return Stream.of(
-                Arguments.of(ENamespaces.KAFKA.name, "kafka", 7),
-                Arguments.of(ENamespaces.KAFKA_KRAFT.name, "kafka", 5),
+                Arguments.of(ENamespaces.KAFKA.name, "anubis-pool-big", 5),
+                Arguments.of(ENamespaces.KAFKA.name, "anubis-pool-small", 3),
+                Arguments.of(ENamespaces.KAFKA_KRAFT.name, "horus-broker", 5),
+                Arguments.of(ENamespaces.KAFKA_KRAFT.name, "horus-controller", 3),
                 Arguments.of(ENamespaces.OPERATOR.name, "strimzi-cluster-operator", 1),
                 Arguments.of(ENamespaces.OPERATOR_KRAFT.name, "strimzi-cluster-operator", 1),
                 Arguments.of(ENamespaces.KAFKA.name, "kafka-exporter", 1),

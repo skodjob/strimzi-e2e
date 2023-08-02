@@ -49,9 +49,6 @@ public class ClientsSmokeTest extends Abstract {
                 Arguments.of(ENamespaces.CLIENTS.name, "kafka-internal-producer", 3),
                 Arguments.of(ENamespaces.CLIENTS.name, "kafka-internal-consumer", 3),
                 Arguments.of(ENamespaces.CLIENTS.name, "kafka-internal-streams", 3),
-                Arguments.of(ENamespaces.CLIENTS.name, "twitter-kafka", 1),
-                Arguments.of(ENamespaces.CLIENTS.name, "twitter-strimzi", 1),
-                Arguments.of(ENamespaces.CLIENTS.name, "twitter-stargate", 1),
                 Arguments.of(ENamespaces.CLIENTS_KRAFT.name, "horus-consumer", 1)
         );
     }
