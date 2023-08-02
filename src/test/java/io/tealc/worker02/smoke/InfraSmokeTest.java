@@ -31,8 +31,8 @@ public class InfraSmokeTest extends Abstract {
     void testComponentIsDeployed(String namespace, String podPrefix, int count) {
         List<Pod> listPods = ClusterManager.getInstance().getClient(EClusters.WORKER_02).inNamespace(namespace).listPods().stream()
                 .filter(pod -> pod.getMetadata().getName().contains(podPrefix)).toList();
-        LOGGER.info("Kafka clients pods list size: {}", listPods.size());
-        assertThat("There are not enough KafkaClients pods in namespace " + namespace, listPods.size(), greaterThanOrEqualTo(count));
+        LOGGER.info("{} pods list size: {}", podPrefix, listPods.size());
+        assertThat("There are not enough " + podPrefix + " pods in namespace " + namespace, listPods.size(), greaterThanOrEqualTo(count));
 
         for (Pod pod: listPods) {
             String podPhase = pod.getStatus().getPhase();
