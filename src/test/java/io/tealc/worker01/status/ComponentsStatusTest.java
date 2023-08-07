@@ -62,7 +62,6 @@ public class ComponentsStatusTest extends Abstract {
 
     private static Stream<Arguments> kafkaConnectInstances() {
         return Stream.of(
-                Arguments.of(ENamespaces.CONNECT.name, "hathor"),
                 Arguments.of(ENamespaces.CONNECT.name, "imhotep")
         );
     }

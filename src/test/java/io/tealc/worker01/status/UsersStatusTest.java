@@ -34,8 +34,6 @@ public class UsersStatusTest extends Abstract {
 
     private Stream<String> getUserNames() {
         return Stream.of("canary",
-                "hathor",
-                "her-ur",
                 "kafka-external-consumer",
                 "kafka-external-producer",
                 "kafka-external-streams",

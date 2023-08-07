@@ -60,7 +60,6 @@ public class InfraSmokeTest extends Abstract {
                 Arguments.of(ENamespaces.KAFKA.name, "cruise-control", 1),
                 Arguments.of(ENamespaces.KAFKA_KRAFT.name, "cruise-control", 1),
                 Arguments.of(ENamespaces.KAFKA.name, "entity-operator", 1),
-                Arguments.of(ENamespaces.CONNECT.name, "hathor", 3),
                 Arguments.of(ENamespaces.CONNECT.name, "imhotep", 1),
                 Arguments.of(ENamespaces.MIRROR_MAKER.name, "replicator-carter", 3),
                 Arguments.of(ENamespaces.MIRROR_MAKER_KRAFT.name, "replicator-set", 3),
