@@ -30,7 +30,7 @@ public class InfraSmokeTest extends Abstract {
     @MethodSource("componentDeployments")
     void testComponentIsDeployed(String namespace, String podPrefix, int count) {
         List<Pod> listPods = ClusterManager.getInstance().getClient(EClusters.WORKER_01).inNamespace(namespace).listPods().stream()
-                .filter(pod -> pod.getMetadata().getName().contains(podPrefix) && pod.getStatus().getReason().contains("Evicted")).toList();
+                .filter(pod -> pod.getMetadata().getName().contains(podPrefix) && !pod.getStatus().getReason().contains("Evicted")).toList();
         LOGGER.info("{}} pods list size: {}", podPrefix, listPods.size());
         assertThat("There are not enough " + podPrefix + " pods in namespace " + namespace, listPods.size(), greaterThanOrEqualTo(count));
 
