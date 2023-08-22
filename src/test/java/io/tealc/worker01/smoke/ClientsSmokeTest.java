@@ -30,11 +30,11 @@ public class ClientsSmokeTest extends Abstract {
     @MethodSource("clientDeployments")
     void testKafkaClientsAreDeployed(String namespace, String clientNamePrefix, int count) {
         List<Pod> listPods = ClusterManager.getInstance().getClient(EClusters.WORKER_01).inNamespace(namespace).listPods().stream()
-                .filter(pod -> pod.getMetadata().getName().contains(clientNamePrefix)).toList();
+                .filter(pod -> pod.getMetadata().getName().contains(clientNamePrefix) && !pod.getStatus().getReason().contains("Evicted")).toList();
         LOGGER.info("Kafka clients pods list size: {}", listPods.size());
         assertThat("There are not enough KafkaClients pods in namespace " + namespace, listPods.size(), greaterThanOrEqualTo(count));
 
-        for (Pod pod: listPods) {
+        for (Pod pod : listPods) {
             String podPhase = pod.getStatus().getPhase();
             assertThat(String.format("Pod {} is not running ({})", pod.getMetadata().getName(), podPhase),
                     podPhase, is("Running"));
