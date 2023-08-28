@@ -44,7 +44,7 @@ public class ClientsSmokeTest extends Abstract {
 
     private static Stream<Arguments> clientDeployments() {
         return Stream.of(
-                Arguments.of(ENamespaces.CLIENTS.name, "big-external-producer", 3),
+                Arguments.of(ENamespaces.CLIENTS.name, "big-external-producer", 30),
                 Arguments.of(ENamespaces.CLIENTS.name, "big-external-consumer", 3),
                 Arguments.of(ENamespaces.CLIENTS.name, "big-external-streams", 3),
                 Arguments.of(ENamespaces.CLIENTS.name, "big-internal-producer", 3),
@@ -53,14 +53,14 @@ public class ClientsSmokeTest extends Abstract {
                 Arguments.of(ENamespaces.CLIENTS.name, "fast-external-producer", 3),
                 Arguments.of(ENamespaces.CLIENTS.name, "fast-external-consumer", 3),
                 Arguments.of(ENamespaces.CLIENTS.name, "fast-external-streams", 3),
-                Arguments.of(ENamespaces.CLIENTS.name, "fast-internal-producer", 3),
+                Arguments.of(ENamespaces.CLIENTS.name, "fast-internal-producer", 30),
                 Arguments.of(ENamespaces.CLIENTS.name, "fast-internal-consumer", 3),
                 Arguments.of(ENamespaces.CLIENTS.name, "fast-internal-streams", 3),
                 Arguments.of(ENamespaces.CLIENTS.name, "iot-external-producer", 3),
                 Arguments.of(ENamespaces.CLIENTS.name, "iot-external-consumer", 3),
                 Arguments.of(ENamespaces.CLIENTS.name, "iot-external-streams", 3),
                 Arguments.of(ENamespaces.CLIENTS.name, "iot-internal-producer", 3),
-                Arguments.of(ENamespaces.CLIENTS.name, "iot-internal-consumer", 3),
+                Arguments.of(ENamespaces.CLIENTS.name, "iot-internal-consumer", 30),
                 Arguments.of(ENamespaces.CLIENTS.name, "iot-internal-streams", 3),
                 Arguments.of(ENamespaces.CLIENTS_KRAFT.name, "horus-consumer", 3)
         );

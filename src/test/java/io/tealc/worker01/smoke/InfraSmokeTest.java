@@ -50,11 +50,11 @@ public class InfraSmokeTest extends Abstract {
 
     private static Stream<Arguments> componentDeployments() {
         return Stream.of(
-                Arguments.of(ENamespaces.KAFKA.name, "anubis-pool-big", 5),
+                Arguments.of(ENamespaces.KAFKA.name, "anubis-pool-big", 50),
                 Arguments.of(ENamespaces.KAFKA.name, "anubis-pool-small", 3),
                 Arguments.of(ENamespaces.KAFKA_KRAFT.name, "horus-broker", 5),
                 Arguments.of(ENamespaces.KAFKA_KRAFT.name, "horus-controller", 3),
-                Arguments.of(ENamespaces.OPERATOR.name, "strimzi-cluster-operator", 1),
+                Arguments.of(ENamespaces.OPERATOR.name, "strimzi-cluster-operator", 10),
                 Arguments.of(ENamespaces.OPERATOR_KRAFT.name, "strimzi-cluster-operator", 1),
                 Arguments.of(ENamespaces.KAFKA.name, "kafka-exporter", 1),
                 Arguments.of(ENamespaces.KAFKA_KRAFT.name, "kafka-exporter", 1),
