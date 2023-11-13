@@ -22,7 +22,7 @@ public class ClusterManager {
 
         Config config = new ConfigBuilder()
                 .withUsername(Environment.WORKER_01_USERNAME)
-                .withPassword(Environment.WORKER_01_PASSWORD)
+                .withOauthToken(Environment.WORKER_01_TOKEN)
                 .withMasterUrl(Environment.WORKER_01_URL)
                 .withDisableHostnameVerification(true)
                 .withTrustCerts(true)
@@ -32,7 +32,7 @@ public class ClusterManager {
 
         config = new ConfigBuilder()
                 .withUsername(Environment.WORKER_02_USERNAME)
-                .withPassword(Environment.WORKER_02_PASSWORD)
+                .withOauthToken(Environment.WORKER_02_TOKEN)
                 .withMasterUrl(Environment.WORKER_02_URL)
                 .withDisableHostnameVerification(true)
                 .withTrustCerts(true)
@@ -42,7 +42,7 @@ public class ClusterManager {
 
         config = new ConfigBuilder()
                 .withUsername(Environment.WORKER_03_USERNAME)
-                .withPassword(Environment.WORKER_03_PASSWORD)
+                .withOauthToken(Environment.WORKER_03_TOKEN)
                 .withMasterUrl(Environment.WORKER_03_URL)
                 .withDisableHostnameVerification(true)
                 .withTrustCerts(true)

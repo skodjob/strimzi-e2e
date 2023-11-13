@@ -20,26 +20,26 @@ public class Environment {
     private static final Map<String, String> VALUES = new HashMap<>();
 
     public static final String WORKER_01_USERNAME_ENV = "WORKER_01_USERNAME";
-    public static final String WORKER_01_PASSWORD_ENV = "WORKER_01_PASSWORD";
+    public static final String WORKER_01_TOKEN_ENV = "WORKER_01_OCP_TOKEN";
     public static final String WORKER_01_URL_ENV = "WORKER_01_URL";
     public static final String WORKER_02_USERNAME_ENV = "WORKER_02_USERNAME";
-    public static final String WORKER_02_PASSWORD_ENV = "WORKER_02_PASSWORD";
+    public static final String WORKER_02_TOKEN_ENV = "WORKER_02_OCP_TOKEN";
     public static final String WORKER_02_URL_ENV = "WORKER_02_URL";
     public static final String WORKER_03_USERNAME_ENV = "WORKER_03_USERNAME";
-    public static final String WORKER_03_PASSWORD_ENV = "WORKER_03_PASSWORD";
+    public static final String WORKER_03_TOKEN_ENV = "WORKER_03_OCP_TOKEN";
     public static final String WORKER_03_URL_ENV = "WORKER_03_URL";
 
     /**
      * Set values
      */
     public static final String WORKER_01_USERNAME = getOrDefault(WORKER_01_USERNAME_ENV, null);
-    public static final String WORKER_01_PASSWORD = getOrDefault(WORKER_01_PASSWORD_ENV, null);
+    public static final String WORKER_01_TOKEN = getOrDefault(WORKER_01_TOKEN_ENV, null);
     public static final String WORKER_01_URL = getOrDefault(WORKER_01_URL_ENV, null);
     public static final String WORKER_02_USERNAME = getOrDefault(WORKER_02_USERNAME_ENV, null);
-    public static final String WORKER_02_PASSWORD = getOrDefault(WORKER_02_PASSWORD_ENV, null);
+    public static final String WORKER_02_TOKEN = getOrDefault(WORKER_02_TOKEN_ENV, null);
     public static final String WORKER_02_URL = getOrDefault(WORKER_02_URL_ENV, null);
     public static final String WORKER_03_USERNAME = getOrDefault(WORKER_03_USERNAME_ENV, null);
-    public static final String WORKER_03_PASSWORD = getOrDefault(WORKER_03_PASSWORD_ENV, null);
+    public static final String WORKER_03_TOKEN = getOrDefault(WORKER_03_TOKEN_ENV, null);
     public static final String WORKER_03_URL = getOrDefault(WORKER_03_URL_ENV, null);
 
     private Environment() { }
