@@ -21,7 +21,6 @@ public class ClusterManager {
         }
 
         Config config = new ConfigBuilder()
-                .withUsername(Environment.WORKER_01_USERNAME)
                 .withOauthToken(Environment.WORKER_01_TOKEN)
                 .withMasterUrl(Environment.WORKER_01_URL)
                 .withDisableHostnameVerification(true)
@@ -31,7 +30,6 @@ public class ClusterManager {
         CLIENTS.put(EClusters.WORKER_01, new KubeClient(config, "default"));
 
         config = new ConfigBuilder()
-                .withUsername(Environment.WORKER_02_USERNAME)
                 .withOauthToken(Environment.WORKER_02_TOKEN)
                 .withMasterUrl(Environment.WORKER_02_URL)
                 .withDisableHostnameVerification(true)
@@ -41,7 +39,6 @@ public class ClusterManager {
         CLIENTS.put(EClusters.WORKER_02, new KubeClient(config, "default"));
 
         config = new ConfigBuilder()
-                .withUsername(Environment.WORKER_03_USERNAME)
                 .withOauthToken(Environment.WORKER_03_TOKEN)
                 .withMasterUrl(Environment.WORKER_03_URL)
                 .withDisableHostnameVerification(true)
