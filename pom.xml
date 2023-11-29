@@ -25,7 +25,7 @@
         <reportportal.version>5.1.0</reportportal.version>
         <lombok.version>1.18.24</lombok.version>
         <sundrio.version>0.93.1</sundrio.version>
-        <logback.version>1.4.7</logback.version>
+        <logback.version>1.4.12</logback.version>
         <slf4j.version>2.0.7</slf4j.version>
     </properties>
 
