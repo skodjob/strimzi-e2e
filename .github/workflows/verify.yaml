@@ -11,16 +11,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Cancel Previous Runs
-        if: github.event_name == 'pull_request'
-        uses: styfle/cancel-workflow-action@0.9.1
-
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
       
       - uses: actions/setup-java@v3
         with:
-          distribution: 'adopt-openj9'
+          distribution: 'temurin'
           java-version: '17'
 
       - name: Build images
