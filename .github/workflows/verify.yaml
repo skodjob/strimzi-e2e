@@ -1,4 +1,4 @@
-name: Build & Push
+name: Build
 on:
   push:
     branches:
@@ -8,7 +8,7 @@ on:
       - "*"
 
 jobs:
-  build-and-push:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Cancel Previous Runs
@@ -23,22 +23,6 @@ jobs:
           distribution: 'adopt-openj9'
           java-version: '17'
 
-      - name: Login to quay
-        env:
-          CONTAINER_USER: ${{ secrets.QUAY_USER }}
-          CONTAINER_PASSWORD: ${{ secrets.QUAY_PASSWORD }}
-          CONTAINER_REGISTRY: quay.io
-        run:
-          echo "$CONTAINER_PASSWORD" | docker login $CONTAINER_REGISTRY --username $CONTAINER_USER --password-stdin
-
       - name: Build images
         run: |
           make java_build
-          make docker_build
-
-      - name: Tag & Push
-        env:
-          USER: tealc
-        if: ${{ github.ref == 'refs/heads/main' }}
-        run: |
-          make docker_push
