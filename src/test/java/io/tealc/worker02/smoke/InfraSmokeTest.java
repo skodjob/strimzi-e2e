@@ -55,7 +55,7 @@ public class InfraSmokeTest extends Abstract {
                 Arguments.of(ENamespaces.KAFKA.name, "kafka-exporter", 1),
                 Arguments.of(ENamespaces.KAFKA.name, "cruise-control", 1),
                 Arguments.of(ENamespaces.KAFKA.name, "entity-operator", 1),
-                Arguments.of(ENamespaces.KAFKA.name, "drain-cleaner", 1)
+                Arguments.of(ENamespaces.DRAIN_CLEANER.name, "drain-cleaner", 1)
         );
     }
 }
