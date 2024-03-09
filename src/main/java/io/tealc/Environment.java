@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -25,6 +26,7 @@ public class Environment {
     public static final String WORKER_02_URL_ENV = "WORKER_02_URL";
     public static final String WORKER_03_TOKEN_ENV = "WORKER_03_OCP_TOKEN";
     public static final String WORKER_03_URL_ENV = "WORKER_03_URL";
+    public static final String KAFKA_VERSION_ENV = "KAFKA_VERSION";
 
     /**
      * Set values
@@ -35,6 +37,7 @@ public class Environment {
     public static final String WORKER_02_URL = getOrDefault(WORKER_02_URL_ENV, null);
     public static final String WORKER_03_TOKEN = getOrDefault(WORKER_03_TOKEN_ENV, null);
     public static final String WORKER_03_URL = getOrDefault(WORKER_03_URL_ENV, null);
+    public static final String KAFKA_VERSION = getOrDefault(KAFKA_VERSION_ENV, "3.5.1");
 
     private Environment() { }
 
@@ -43,7 +46,13 @@ public class Environment {
         LOGGER.info("Used environment variables:");
         VALUES.entrySet().stream()
                 .sorted(Map.Entry.comparingByKey())
-                .forEach(entry -> LOGGER.info(debugFormat, entry.getKey(), entry.getValue()));
+                .forEach(entry -> {
+                    if (!entry.getKey().toLowerCase(Locale.ROOT).contains("pass")) {
+                        LOGGER.info(debugFormat, entry.getKey(), entry.getValue());
+                    } else {
+                        LOGGER.info(debugFormat, entry.getKey(), "*****");
+                    }
+                });
     }
 
     private static String getOrDefault(String varName, String defaultValue) {
