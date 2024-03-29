@@ -12,16 +12,16 @@
         <maven.compiler.target>17</maven.compiler.target>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.surefire.version>3.0.0-M7</maven.surefire.version>
-        <maven.failsafe.version>3.0.0-M7</maven.failsafe.version>
+        <maven.surefire.version>3.2.5</maven.surefire.version>
+        <maven.failsafe.version>3.2.5</maven.failsafe.version>
         <checkstyle.version>10.9.2</checkstyle.version>
         <spotbugs.version>4.7.3</spotbugs.version>
-        <fabric8.version>6.6.2</fabric8.version>
+        <fabric8.version>6.10.0</fabric8.version>
         <hamcrest.version>2.2</hamcrest.version>
-        <junit.version>5.9.2</junit.version>
+        <junit.version>5.10.2</junit.version>
         <slf4j.version>1.7.33</slf4j.version>
         <maven.checkstyle.version>3.1.2</maven.checkstyle.version>
-        <strimzi.version>0.36.1</strimzi.version>
+        <strimzi.version>0.40.0</strimzi.version>
         <reportportal.version>5.1.0</reportportal.version>
         <lombok.version>1.18.24</lombok.version>
         <sundrio.version>0.93.1</sundrio.version>

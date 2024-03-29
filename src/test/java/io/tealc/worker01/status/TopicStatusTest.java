@@ -4,7 +4,7 @@
  */
 package io.tealc.worker01.status;
 
-import io.strimzi.api.kafka.model.KafkaTopic;
+import io.strimzi.api.kafka.model.topic.KafkaTopic;
 import io.tealc.Abstract;
 import io.tealc.ClusterManager;
 import io.tealc.EClusters;

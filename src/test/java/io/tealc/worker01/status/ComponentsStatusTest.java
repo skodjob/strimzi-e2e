@@ -4,9 +4,9 @@
  */
 package io.tealc.worker01.status;
 
-import io.strimzi.api.kafka.model.Kafka;
-import io.strimzi.api.kafka.model.KafkaConnect;
-import io.strimzi.api.kafka.model.KafkaMirrorMaker2;
+import io.strimzi.api.kafka.model.kafka.Kafka;
+import io.strimzi.api.kafka.model.connect.KafkaConnect;
+import io.strimzi.api.kafka.model.mirrormaker2.KafkaMirrorMaker2;
 import io.tealc.Abstract;
 import io.tealc.ClusterManager;
 import io.tealc.EClusters;
