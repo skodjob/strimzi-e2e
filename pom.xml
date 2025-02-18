@@ -15,13 +15,13 @@
         <maven.surefire.version>3.2.5</maven.surefire.version>
         <maven.failsafe.version>3.2.5</maven.failsafe.version>
         <checkstyle.version>10.9.2</checkstyle.version>
-        <spotbugs.version>4.7.3</spotbugs.version>
-        <fabric8.version>6.10.0</fabric8.version>
+        <spotbugs.version>4.9.1</spotbugs.version>
+        <fabric8.version>7.1.0</fabric8.version>
         <hamcrest.version>2.2</hamcrest.version>
-        <junit.version>5.10.2</junit.version>
+        <junit.version>5.11.4</junit.version>
         <slf4j.version>1.7.33</slf4j.version>
         <maven.checkstyle.version>3.1.2</maven.checkstyle.version>
-        <strimzi.version>0.43.0</strimzi.version>
+        <strimzi.version>0.45.0</strimzi.version>
         <lombok.version>1.18.24</lombok.version>
         <sundrio.version>0.93.1</sundrio.version>
         <logback.version>1.4.12</logback.version>
